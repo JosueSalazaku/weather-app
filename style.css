@@ -4,5 +4,41 @@
 }
 
 body {
-    background: linear-gradient(-90deg, #00C9FF 0%, #92FE9D 100%);
+    background: #3745C2;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    margin-top: 35px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+}
+
+#location-input {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+input {
+    border-radius: 35px;
+    border: 2px solid white;
+    height: 35px;
+    width: 245px;
+    background: #3745C2;
+}
+
+.fetch-btn {
+    border-radius: 200px;
+    border: none;
+    height: 35px;
+    width: 50px;
+    background: #b7beff;
+
 }
