@@ -17,3 +17,4 @@ const locationInput = document.querySelector("#location-input");
 const display = document.querySelector("#display");
 const extraInfo = document.querySelector("#extra-info");
 const forecast = document.querySelector("#forecast");
+
