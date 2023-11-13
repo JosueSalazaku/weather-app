@@ -1,5 +1,8 @@
 {
-    "editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "prettier.useTabs": true
+	"editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.useTabs": true,
+	"terminal.integrated.fontFamily": "monospace",
+	"editor.formatOnSave": true,
+	"editor.fontFamily": "JetBrains Mono"
 }
