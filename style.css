@@ -33,7 +33,12 @@ body {
 	align-items: flex-start;
 }
 
-#location-input {
+section {
+	font-size: 20px;
+}
+
+#location-section {
+	width: 100%;
 	margin-top: 20px;
 	display: flex;
 	flex-direction: row;
@@ -42,11 +47,11 @@ body {
 	gap: 15px;
 }
 
-input {
+#location-section input {
 	border-radius: 35px;
 	border: 2px solid white;
 	height: 35px;
-	width: 275px;
+	/* width: 275px; */
 	background: #3745c2;
 	resize: horizontal;
 	font-size: 20px;
