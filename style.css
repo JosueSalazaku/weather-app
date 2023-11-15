@@ -73,6 +73,8 @@ section {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top: 15px;
+	width: auto;
 }
 
 #location-section {
@@ -107,4 +109,18 @@ section {
 
 #extra-weather {
 	margin-top: 35px;
+	margin-left: 20px;
+	margin-right: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+#forecast div {
+	color: white;
+	font-weight: 400;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }

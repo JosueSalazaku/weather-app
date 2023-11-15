@@ -69,8 +69,14 @@ async function appWeather() {
 				const maxTemp = weatherData.daily.temperature_2m_max[i];
 				const minTemp = weatherData.daily.temperature_2m_min[i];
 
-				const forecastInfo = `${day}: Max Temp: ${maxTemp}°C, Min Temp: ${minTemp}°C`;
-				forecast.innerHTML += forecastInfo;
+				const forecastItem = document.createElement("div");
+
+				const dayAndTempElement = document.createElement("p");
+				dayAndTempElement.textContent = `${day}: Max Temp: ${maxTemp}°C, Min Temp: ${minTemp}°C`;
+
+				forecastItem.appendChild(dayAndTempElement);
+
+				forecast.appendChild(forecastItem);
 			}
 		} else {
 			console.error("not getting geolocation data:", geo);
