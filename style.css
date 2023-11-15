@@ -105,14 +105,6 @@ section {
 	background: #b7beff;
 }
 
-/* #extra-weather {
+#extra-weather {
 	margin-top: 35px;
-	background: #b7beff;
-	display: flex;
-	flex-direction: column;
-	justify-content: start;
-	align-items: center;
-	gap: 15px;
-	width: 100vw;
-	height: 600px;
-} */
+}
