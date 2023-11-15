@@ -20,6 +20,16 @@ const locationInput = document.getElementById("input-location");
 const fetchBtn = document.querySelector(".fetch-btn");
 const forecast = document.querySelector("#forecast");
 
+const daysOfTheWeek = [
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday",
+];
+
 async function getGeoData(location) {
 	const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1&language=en&format=json`;
 	const response = await fetch(geoUrl);
@@ -47,10 +57,12 @@ async function appWeather() {
 			const weatherData = await getWeatherData(geo.latitude, geo.longitude);
 
 			console.log("Weather data:", weatherData);
-
+			//weather info
 			country.innerHTML = `${geo.country}`;
 			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C,
 			`;
+
+			//7day forcast
 		} else {
 			console.error("not getting geolocation data:", geo);
 		}
