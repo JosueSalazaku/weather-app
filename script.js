@@ -14,12 +14,10 @@ Remember the user choice on subsequent visits
 Allow the user to compare the weather in two cities
 Use the API of https://unsplash.com/ to show a photo of the city they entered in the form */
 
-const forecast = document.querySelector("#forecast");
+const currentTemp = document.querySelector("#currentTemp");
 const locationInput = document.getElementById("input-location");
 const fetchBtn = document.querySelector(".fetch-btn");
-
-const weatherUrl =
-	"https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relative_humidity_2m,rain,weather_code&daily=sunrise,sunset&timezone=Europe%2FLondon";
+const forecast = document.querySelector("#forecast");
 
 async function getGeoData(location) {
 	const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1&language=en&format=json`;
@@ -29,28 +27,37 @@ async function getGeoData(location) {
 	return data.results[0];
 }
 
-async function getWeatherData(location) {
+async function getWeatherData(latitude, longitude) {
+	const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,wind_speed_10m_max&timeformat=unixtime&timezone=Europe%2FLondon`;
 	const response = await fetch(weatherUrl);
 	const data = await response.json();
 	return data;
 }
 
-async function updateWeather() {
+async function appWeather() {
 	const locationInputValue = locationInput.value;
 	console.log(locationInputValue);
 
-	const geo = await getGeoData(locationInputValue);
-	const weatherData = await getWeatherData(locationInputValue);
+	try {
+		const geo = await getGeoData(locationInputValue);
+		console.log(geo);
 
-	// Update the DOM with the weather data
-	const forecastElement = document.getElementById("forecast");
-	forecastElement.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C`;
+		if (geo) {
+			const weatherData = await getWeatherData(geo.latitude, geo.longitude);
+
+			console.log("Weather data:", weatherData);
+
+			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C`;
+		} else {
+			console.error("not getting geolocation data:", geo);
+		}
+	} catch (error) {
+		console.error("not weather:", error);
+	}
 }
 
 locationInput.addEventListener("keyup", (event) => {
 	if (event.key === "Enter") {
-		updateWeather();
+		appWeather();
 	}
 });
-
-fetchBtn.addEventListener("click", updateWeather);
