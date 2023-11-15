@@ -15,6 +15,7 @@ Allow the user to compare the weather in two cities
 Use the API of https://unsplash.com/ to show a photo of the city they entered in the form */
 
 const currentTemp = document.querySelector("#currentTemp");
+const country = document.querySelector("#country");
 const locationInput = document.getElementById("input-location");
 const fetchBtn = document.querySelector(".fetch-btn");
 const forecast = document.querySelector("#forecast");
@@ -47,7 +48,9 @@ async function appWeather() {
 
 			console.log("Weather data:", weatherData);
 
-			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C`;
+			country.innerHTML = `${geo.country}`;
+			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C,
+			`;
 		} else {
 			console.error("not getting geolocation data:", geo);
 		}

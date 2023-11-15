@@ -21,7 +21,7 @@ body {
 	align-items: center;
 	gap: 15px;
 	border: 2px solid #b7beff;
-	width: 500px;
+	width: 400px;
 	height: 600px;
 	border-radius: 20px;
 }
@@ -51,7 +51,7 @@ section {
 	border-radius: 35px;
 	border: 2px solid white;
 	height: 35px;
-	/* width: 275px; */
+	max-width: auto;
 	background: #3745c2;
 	resize: horizontal;
 	font-size: 20px;
