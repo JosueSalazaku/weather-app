@@ -1,22 +1,5 @@
-/** TODO:
-In the home page the user can enter the city of his/her choice (think of the right HTML elements here)
-On clicking the SUBMIT button or pressing ENTER:
-Use an api to define the city geo-location data from the user-input
-Use an api to get the weather data for at least the next 5 days
-Manipulate your DOM in order to display the weather for the next 5 days in your application.
-Find a way to make those API calls asynchronous.
-The application must be responsive, accessible and mobile friendly
-💡 Not sure where to start? Split this features into multiple smaller todos (in your code, sketch, ...)
-
-TODO:
-Display a line graph of temperature over time using a library such as Chart.js
-Remember the user choice on subsequent visits
-Allow the user to compare the weather in two cities
-Use the API of https://unsplash.com/ to show a photo of the city they entered in the form */
-
 const currentTemp = document.querySelector("#currentTemp");
 const country = document.querySelector("#country");
-
 const locationInput = document.getElementById("input-location");
 const fetchBtn = document.querySelector(".fetch-btn");
 const forecast = document.querySelector("#forecast");
@@ -32,11 +15,11 @@ const daysOfTheWeek = [
 ];
 
 const weatherSvgs = {
-	clear: "day.svg",
-	cloudy: "cloudy.svg",
-	rainy: "rainy.svg",
-	snow: "snowy-6.svg",
-	thunder: "thunder.svg",
+	clear: "/weather svgs/day.svg",
+	cloudy: "/weather svgs/cloudy.svg",
+	rainy: "/weather svgs/rainy.svg",
+	snow: "/weather svgs/snowy-6.svg",
+	thunder: "/weather svgs/thunder.svg",
 };
 
 async function getGeoData(location) {
@@ -60,7 +43,7 @@ async function appWeather() {
 
 	try {
 		const geo = await getGeoData(locationInputValue);
-		console.log(geo);
+		console.log("Geo data bro", geo);
 		console.log(daysOfTheWeek);
 
 		if (geo) {
@@ -69,18 +52,10 @@ async function appWeather() {
 			console.log("Weather data:", weatherData);
 			console.log(forecast);
 			//weather info
-			country.innerHTML = `${geo.country}`;
+			country.innerHTML = `${geo.name}, ${geo.country}`;
 			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C <br> 
 			Max Temp: ${weatherData.daily.temperature_2m_max[0]}°C  <br> 
           	Min Temp: ${weatherData.daily.temperature_2m_min[0]}°C`;
-
-			//7day forcast
-			// forecast.innerHTML = "Frocast for the week:";
-			// for (let i = 1; i <= 7; i++) {
-			// 	const dayOfWeek =
-			// 		daysOfTheWeek[new Date(weatherData.daily.time[i] * 100).getDay()];
-			// 	forecast.innerHTML += `${dayOfWeek}: Temperature: ${weatherData.hourly.temperature_2m[0]}°C`;
-			// }
 		} else {
 			console.error("not getting geolocation data:", geo);
 		}
@@ -94,5 +69,3 @@ locationInput.addEventListener("keyup", (event) => {
 		appWeather();
 	}
 });
-
-// fetchBtn.addEventListener("click", appWeather);
