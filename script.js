@@ -61,3 +61,5 @@ locationInput.addEventListener("keyup", (event) => {
 		appWeather();
 	}
 });
+
+fetchBtn.addEventListener("click", appWeather);
