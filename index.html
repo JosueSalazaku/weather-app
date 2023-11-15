@@ -7,18 +7,22 @@
 		<title>Weather App</title>
 	</head>
 	<body>
-		<main id="card">
-			<header class="nav">
-				<h1>Weather App</h1>
-			</header>
-			<section id="location-section">
-				<input type="text" id="input-location" placeholder="location" />
-				<button class="fetch-btn"></button>
-			</section>
-			<section id="country"></section>
-			<section id="extra-info"></section>
-			<section id="currentTemp"></section>
-			<section id="forcast"></section>
+		<main class="container">
+			<div id="card">
+				<header class="nav">
+					<h1>Weather App</h1>
+				</header>
+				<section id="location-section">
+					<input type="text" id="input-location" placeholder="location" />
+					<!-- <button class="fetch-btn"></button> -->
+				</section>
+				<section id="country"></section>
+				<section id="weather-svgs"></section>
+				<section id="currentTemp"></section>
+			</div>
+			<div id="extra-weather">
+				<section id="forcast"></section>
+			</div>
 		</main>
 		<script defer src="script.js"></script>
 	</body>
