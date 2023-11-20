@@ -1,4 +1,4 @@
-const WMO = {
+const WMO_CODES = {
 	0: {
 		day: {
 			description: "Sunny",
@@ -280,3 +280,5 @@ const WMO = {
 		},
 	},
 };
+
+export default WMO_CODES;

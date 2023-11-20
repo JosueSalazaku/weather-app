@@ -1,5 +1,7 @@
 "use strict";
-import { WMO } from "./wmoWeather";
+
+import WMO_CODES from "./wmo_codes.mjs";
+console.log(WMO_CODES);
 
 const currentTemp = document.querySelector("#currentTemp");
 const country = document.querySelector("#country");
@@ -17,12 +19,12 @@ const daysOfTheWeek = [
 	"Sunday",
 ];
 
-const weatherSvgs = {
-	clear: "weather-svgs/day.svg",
-	cloudy: "weather-svgs/cloudy.svg",
-	rain: "weather-svgs/rainy.svg",
-	snow: "weather-svgs/snowy-6.svg",
-	thunder: "weather-svgs/thunder.svg",
+const icons = {
+	"0_day": "icons/day-code-0.png",
+	3: "icons/code-3.png",
+	"80_day": "icons/code-80-82.png",
+	"85_day": "icons/code-85-86.png",
+	"95_day": "icons/code-95-99.png",
 };
 
 async function getGeoData(location) {
@@ -40,9 +42,34 @@ async function getWeatherData(latitude, longitude) {
 	return data;
 }
 
+function getWeatherImg() {
+	const cardImg = document.createElement("img");
+	WMO_CODES["name"];
+	cardImg.src = WMO_CODES[result.daily.weather_code[i]].day.image;
+	imageBox.appendChild(cardImg);
+}
+
+function updateForecastItem(
+	forecastItem,
+	day,
+	maxTemp,
+	minTemp,
+	weather_code,
+	is_day
+) {
+	const dayAndTempElement = document.createElement("p");
+	dayAndTempElement.innerHTML = `<b>${day}<b> <br> Max Temp: ${maxTemp}°C<br> Min Temp: ${minTemp}°C`;
+
+	const weatherImg = document.createElement("img");
+	weatherImg.src = getWeatherImg(weather_code, is_day);
+	weatherImg.alt = "Weather Icon";
+	dayAndTempElement.appendChild(weatherImg);
+
+	forecastItem.appendChild(dayAndTempElement);
+}
+
 async function appWeather() {
 	const locationInputValue = locationInput.value;
-	console.log(locationInputValue);
 
 	try {
 		const geo = await getGeoData(locationInputValue);
@@ -51,7 +78,7 @@ async function appWeather() {
 
 		if (geo) {
 			const weatherData = await getWeatherData(geo.latitude, geo.longitude);
-			console.log("Weather data:", weatherData);
+			console.log("Weather data bro:", weatherData);
 
 			country.innerHTML = `${geo.country}`;
 			currentTemp.innerHTML = `Temperature: ${weatherData.hourly.temperature_2m[0]}°C <br> 
@@ -65,12 +92,6 @@ async function appWeather() {
 				const minTemp = weatherData.daily.temperature_2m_min[i];
 				const forecastItem = document.createElement("div");
 
-				const weatherSvgElement = document.createElement("img");
-				weatherSvgElement.src = getWeatherSvg(
-					weatherData.daily.weather_code[i]
-				);
-				weatherSvgElement.alt = "Weather Icon";
-
 				const dayAndTempElement = document.createElement("p");
 				dayAndTempElement.innerHTML = `<b>${day}<b> <br> Max Temp: ${maxTemp}°C<br> Min Temp: ${minTemp}°C`;
 				forecastItem.appendChild(dayAndTempElement);
@@ -82,18 +103,6 @@ async function appWeather() {
 	} catch (error) {
 		console.error("not weather:", error);
 	}
-}
-
-function getWeatherSvg(weatherCode) {
-	const weatherSvgs = {
-		clear: "/weather-svgs/day.svg",
-		cloudy: "/weather-svgs/cloudy.svg",
-		rain: "/weather-svgs/rainy.svg",
-		snow: "/weather-svgs/snowy-6.svg",
-		thunder: "/weather-svgs/thunder.svg",
-	};
-
-	return weatherSvgs[weatherCode] || "/weather-svgs/default.svg";
 }
 
 locationInput.addEventListener("keyup", (event) => {
