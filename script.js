@@ -19,14 +19,6 @@ const daysOfTheWeek = [
 	"Sunday",
 ];
 
-const icons = {
-	"0_day": "icons/day-code-0.png",
-	3: "icons/code-3.png",
-	"80_day": "icons/code-80-82.png",
-	"85_day": "icons/code-85-86.png",
-	"95_day": "icons/code-95-99.png",
-};
-
 async function getGeoData(location) {
 	const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1&language=en&format=json`;
 	const response = await fetch(geoUrl);
@@ -42,11 +34,15 @@ async function getWeatherData(latitude, longitude) {
 	return data;
 }
 
-function getWeatherImg() {
-	const cardImg = document.createElement("img");
-	WMO_CODES["name"];
-	cardImg.src = WMO_CODES[result.daily.weather_code[i]].day.image;
-	imageBox.appendChild(cardImg);
+function getWeatherImg(weather_code, is_day) {
+	const key = `${weather_code}_${is_day ? "day" : "night"}`;
+
+	if (WMO_CODES.hasOwnProperty(weather_code)) {
+		return WMO_CODES[weather_code][is_day ? "day" : "night"].image;
+	} else {
+		console.error(`Image path not found for WMO code: ${weather_code}`);
+		return "path/to/default/image.png"; // Replace with the path to your default image
+	}
 }
 
 function updateForecastItem(
@@ -55,12 +51,15 @@ function updateForecastItem(
 	maxTemp,
 	minTemp,
 	weather_code,
-	is_day
+	is_day,
+	weatherImg
 ) {
+	// const weatherImg = documen.querySelectoR("#weather-imgs");
+
 	const dayAndTempElement = document.createElement("p");
 	dayAndTempElement.innerHTML = `<b>${day}<b> <br> Max Temp: ${maxTemp}°C<br> Min Temp: ${minTemp}°C`;
 
-	const weatherImg = document.createElement("img");
+	weatherImg.document.createElement("img");
 	weatherImg.src = getWeatherImg(weather_code, is_day);
 	weatherImg.alt = "Weather Icon";
 	dayAndTempElement.appendChild(weatherImg);
@@ -110,3 +109,5 @@ locationInput.addEventListener("keyup", (event) => {
 		appWeather();
 	}
 });
+
+fetchBtn.addEventListener("click", appWeather);
